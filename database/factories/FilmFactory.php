@@ -6,7 +6,7 @@ use App\Country;
 use App\Genre;
 use App\Image;
 
-$factory->define(App\Movie::class, function (Faker $faker) {
+$factory->define(App\Film::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
         'description' => $faker->words,
@@ -14,7 +14,7 @@ $factory->define(App\Movie::class, function (Faker $faker) {
         'rating_id' => Rating::first()->id,
         'country_id' => Country::first()->id,
         'genre_id' => Genre::first()->id,
-        'image_id' => Image::first()->id,
-        'release_date' => now()
+        'release_date' => now(),
+        'ticket_price' => 24.55
     ];
 });

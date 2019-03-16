@@ -37,12 +37,6 @@ class CreateFilmsTable extends Migration
                 ->on('genres')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->unsignedBigInteger('image_id');
-            $table->foreign('image_id', 'films_image_id_fk')
-                ->references('id')
-                ->on('images')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->timestamp('release_date');
             $table->timestamps();
         });
