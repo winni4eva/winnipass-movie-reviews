@@ -9,12 +9,13 @@ use App\Genre;
 use App\Image;
 use App\Country;
 use App\Comment;
+use App\FilmRating;
 
 class Film extends Model
 {
-    public function rating()
+    public function ratings()
     {
-        return $this->hasOne(Rating::class);
+        return $this->hasMany(FilmRating::class);
     }
 
     public function genres()

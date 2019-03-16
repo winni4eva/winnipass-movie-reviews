@@ -18,7 +18,7 @@ class CreateFilmRatingsTable extends Migration
             $table->unsignedBigInteger('rating_id');
             $table->foreign('rating_id', 'films_ratings_rating_id_fk')
                 ->references('id')
-                ->on('genres')
+                ->on('ratings')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->unsignedBigInteger('film_id');
