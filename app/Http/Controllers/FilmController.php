@@ -48,9 +48,8 @@ class FilmController extends Controller
      */
     public function show($film)
     {
-        logger($film);
-        $film = Film::whereSlug($film)->orWhere('id', $film)->first();
-        logger($film);
+        $film = Film::with(['rating'])->where('slug', $film)->orWhere('id', $film)->first();
+    
         return view('film.show')->with(['film' => $film]);
     }
 

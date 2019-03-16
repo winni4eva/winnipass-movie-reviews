@@ -4,9 +4,8 @@
 <div class="container">
     <div class="page">
         <div class="breadcrumbs">
-            <a href="index.html">Home</a>
-            <a href="review.html">Movie Review</a>
-            <span>The Croods</span>
+            <a href="{{route('home')}}">Home</a>
+            <span>{{$film->name}}</span>
         </div>
 
         <div class="content">
@@ -15,7 +14,7 @@
                     <figure class="movie-poster"><img src="dummy/single-image.jpg" alt="#"></figure>
                 </div>
                 <div class="col-md-6">
-                    <h2 class="movie-title">The Croods</h2>
+                    <h2 class="movie-title">{{$film->name}}</h2>
                     <div class="movie-summary">
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
 
@@ -23,7 +22,7 @@
                     </div>
                     <ul class="movie-meta">
                         <li><strong>Rating:</strong> 
-                            <div class="star-rating" title="Rated 4.00 out of 5"><span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
+                            <div class="star-rating" title="Rated {{$film->rating->rating}} out of 5"><span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
                         </li>
                         <li><strong>Length:</strong> 98 min</li>
                         <li><strong>Premiere:</strong> 22 March 2013 (USA)</li>
