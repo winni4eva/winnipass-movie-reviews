@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Movie;
 use Illuminate\Http\Request;
+use App\Film;
 
-class MovieController extends Controller
+class FilmController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,9 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        $films = Film::all();
+
+        return view('film.films')->with(compact('films'));
     }
 
     /**
@@ -41,10 +43,10 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Movie  $movie
+     * @param  \App\Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show(Film $film)
     {
         //
     }
@@ -52,10 +54,10 @@ class MovieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Movie  $movie
+     * @param  \App\Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function edit(Movie $movie)
+    public function edit(Film $film)
     {
         //
     }
@@ -64,7 +66,7 @@ class MovieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Movie  $movie
+     * @param  \App\Film  $film
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Movie $movie)
@@ -75,10 +77,10 @@ class MovieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Movie  $movie
+     * @param  \App\Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy(Film $film)
     {
         //
     }
