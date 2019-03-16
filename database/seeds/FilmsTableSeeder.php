@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 use App\Film;
 use App\FilmGenre;
 use App\Genre;
+use App\FilmRating;
+use App\Rating;
 
 class FilmsTableSeeder extends Seeder
 {
@@ -46,6 +48,13 @@ class FilmsTableSeeder extends Seeder
                 [
                     'film_id' => $film->id,
                     'genre_id' => Genre::inRandomOrder()->first()
+                ]
+            );
+
+            factory(FilmRating::class, 3)->create(
+                [
+                    'film_id' => $film->id,
+                    'rating_id' => Rating::inRandomOrder()->first()
                 ]
             );
         }

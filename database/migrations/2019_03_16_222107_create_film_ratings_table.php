@@ -15,6 +15,18 @@ class CreateFilmRatingsTable extends Migration
     {
         Schema::create('film_ratings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('rating_id');
+            $table->foreign('rating_id', 'films_ratings_rating_id_fk')
+                ->references('id')
+                ->on('genres')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->unsignedBigInteger('film_id');
+            $table->foreign('film_id', 'films_ratings_film_id_fk')
+                ->references('id')
+                ->on('films')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
