@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Rating;
 
 class RatingsTableSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class RatingsTableSeeder extends Seeder
         ];
 
         foreach ($ratings as $rating) {
-            factory(Country::class)->create(
+            factory(Rating::class)->create(
                 [
                     'name' => $rating['name'],
                     'description' => $rating['desc'] 
