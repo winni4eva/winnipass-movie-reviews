@@ -9,6 +9,7 @@
                     <div class="latest-movie">
                         <a href="#"><img src="dummy/thumb-3.jpg" alt="Movie 3"></a>
                     </div>
+                <h3><a href="{{route('film', ['slug' => $film->slug])}}">{{$film->name}}</a></h3>
                 </div>
             @endforeach
         </div> <!-- .row -->

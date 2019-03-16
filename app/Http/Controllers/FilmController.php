@@ -46,9 +46,12 @@ class FilmController extends Controller
      * @param  \App\Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function show(Film $film)
+    public function show($film)
     {
-        //
+        logger($film);
+        $film = Film::whereSlug($film)->orWhere('id', $film)->first();
+        logger($film);
+        return view('film.show')->with(['film' => $film]);
     }
 
     /**
