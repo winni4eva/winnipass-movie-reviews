@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Film;
+use App\FilmGenre;
+use App\Genre;
 
 class FilmsTableSeeder extends Seeder
 {
@@ -31,12 +33,19 @@ class FilmsTableSeeder extends Seeder
         ];
 
         foreach ($films as $film) {
-            factory(Film::class)->create(
+            $film = factory(Film::class)->create(
                 [
                     'name' => $film['name'],
                     'description' => $film['desc'], 
                     'slug' => Str::slug($film['name']), 
                     'ticket_price' => $film['price'],
+                ]
+            );
+
+            factory(FilmGenre::class, 3)->create(
+                [
+                    'film_id' => $film->id,
+                    'genre_id' => Genre::inRandomOrder()->first()
                 ]
             );
         }
