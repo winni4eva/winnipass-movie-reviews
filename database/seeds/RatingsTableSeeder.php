@@ -12,18 +12,10 @@ class RatingsTableSeeder extends Seeder
      */
     public function run()
     {
-        $ratings = [
-            ['name' => 'PG', 'desc' => 'Parental Gudance'],
-            ['name' => '18', 'desc' => 'Eighteen and above'],  
-        ];
-
-        foreach ($ratings as $rating) {
-            factory(Rating::class)->create(
-                [
-                    'name' => $rating['name'],
-                    'description' => $rating['desc'] 
-                ]
-            );
-        }
+        factory(Rating::class)->create(['rating' => 1]);
+        factory(Rating::class)->create(['rating' => 2]);
+        factory(Rating::class)->create(['rating' => 3]);
+        factory(Rating::class)->create(['rating' => 4]);
+        factory(Rating::class)->create(['rating' => 5]);
     }
 }
