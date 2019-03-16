@@ -18,33 +18,31 @@ class CreateFilmsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('slug');
-            $table->integer('rating_id')->unsigned();
+            $table->unsignedBigInteger('rating_id');
             $table->foreign('rating_id', 'films_rating_id_fk')
                 ->references('id')
                 ->on('ratings')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->decimal('ticket_price', 13, 2);
-            $table->integer('country_id')->unsigned();
+            $table->unsignedBigInteger('country_id');
             $table->foreign('country_id', 'films_country_id_fk')
                 ->references('id')
                 ->on('countries')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->integer('genre_id')->unsigned();
+            $table->unsignedBigInteger('genre_id');
             $table->foreign('genre_id', 'films_genre_id_fk')
                 ->references('id')
                 ->on('genres')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->decimal('ticket_price', 13, 2);
-            $table->integer('image_id')->unsigned();
+            $table->unsignedBigInteger('image_id');
             $table->foreign('image_id', 'films_image_id_fk')
                 ->references('id')
                 ->on('images')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->decimal('ticket_price', 13, 2);
             $table->timestamp('release_date');
             $table->timestamps();
         });
