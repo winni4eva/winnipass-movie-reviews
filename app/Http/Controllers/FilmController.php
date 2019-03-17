@@ -20,7 +20,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $films = Film::with(['ratings.rating', 'genres.genre'], 'image')->get();
+        $films = Film::with(['ratings.rating', 'genres.genre'], 'image')->simplePaginate(1);
 
         return view('film.films')->with(compact('films'));
     }

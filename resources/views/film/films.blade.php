@@ -12,6 +12,7 @@
                 <h3><a href="{{route('film', ['slug' => $film->slug])}}">{{$film->name}}</a></h3>
                 </div>
             @endforeach
+            {{ $films->links() }}
         </div> <!-- .row -->
     </div>
 </div> <!-- .container -->
