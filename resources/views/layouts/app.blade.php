@@ -46,7 +46,19 @@
                                         </li>
                                     @endif
                                 @else
-                                <li class="menu-item"><a href="{{route('films.create')}}">Add Film</a></li>
+                                    @if (Auth::user()->isAdmin())    
+                                        <li class="menu-item"><a href="{{route('films.create')}}">Add Film</a></li>
+                                    @endif
+                                    <li class="menu-item current-menu-item">
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                          document.getElementById('logout-form').submit();">
+                                             {{ __('Logout') }}
+                                         </a>
+                                    </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 @endguest
                             </ul> <!-- .menu -->
                         </div> <!-- .main-navigation -->
