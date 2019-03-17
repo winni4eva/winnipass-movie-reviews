@@ -39,19 +39,23 @@
                         <div class="form-group">
                                 {!! Form::label('rating_id', 'Select Rating:', ['class' => 'col-md-4 control-label']) !!}
                             <div class="col-md-6">
-                                {!! Form::select('rating_id', $ratings, null, ['class' => 'form-control']) !!}
+                                @foreach($ratings as $rating)
+                                    {{$rating->rating}} {!! Form::checkbox('rating_id[]', $rating->id) !!}
+                                @endforeach
                             </div>  
                         </div>
                         <div class="form-group">
-                                {!! Form::label('rating_id', 'Select Genre:', ['class' => 'col-md-4 control-label']) !!}
+                                {!! Form::label('genre_id', 'Select Genre:', ['class' => 'col-md-4 control-label']) !!}
                             <div class="col-md-6">
-                                {!! Form::select('rating_id', $genres, null, ['class' => 'form-control']) !!}
+                                @foreach($genres as $genre)
+                                    {{$genre->name}} {!! Form::checkbox('genre_id[]', $genre->id) !!}
+                                @endforeach
                             </div>  
                         </div>
                         <div class="form-group">
-                                {!! Form::label('rating_id', 'Select Genre:', ['class' => 'col-md-4 control-label']) !!}
+                                {!! Form::label('country_id', 'Select Country:', ['class' => 'col-md-4 control-label']) !!}
                             <div class="col-md-6">
-                                {!! Form::select('rating_id', $countries, null, ['class' => 'form-control']) !!}
+                                {!! Form::select('country_id', $countries, null, ['class' => 'form-control']) !!}
                             </div>  
                         </div>
                         

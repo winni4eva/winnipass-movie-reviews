@@ -29,8 +29,9 @@ class FilmController extends Controller
      */
     public function create()
     {
-        $ratings = Rating::pluck('rating', 'id');
-        $genres = Genre::pluck('name', 'id');
+        $ratings = Rating::select('id', 'rating')->get();
+        $genres = Genre::select('id', 'name')->get();
+        
         $countries = Country::pluck('name', 'id');
 
         return view('film.create')->with(compact('ratings', 'genres', 'countries'));
@@ -44,7 +45,7 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        logger($request->all());
     }
 
     /**
