@@ -16,3 +16,4 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/film/{slug}', 'FilmController@show')->name('film');
 Route::resource('/films', 'FilmController');
+Route::resource('/comments', 'CommentController');

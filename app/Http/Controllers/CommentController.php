@@ -35,7 +35,13 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = Comment::create([
+            'user_id' => auth()->user()->id,
+            'film_id' => $request->get('film_id'),
+            'comment' => $request->get('comments')
+        ]);
+
+        return redirect()->route('films.index');
     }
 
     /**

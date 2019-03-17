@@ -30,6 +30,21 @@
                         </li>
                     </ul>
                 </div>
+                <div class="col-md-6">
+                    @guest
+                        <li class="menu-item" style="visibility: hidden">
+                            <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @else
+                        <h3>Comment</h3>
+                        {!! Form::open(['route' => ['comments.store'], 'enctype' => 'multipart/form-data']) !!}
+                            <input type="hidden" name="film_id" id="film_id" value="{{$film->id}}"/>
+                            {!! Form::textarea('comments', null, ['class'=>'form-control']) !!}
+
+                            {!! Form::submit('Comment', ['class' =>  'btn btn-primary']) !!}
+                        {!! Form::close() !!}
+                    @endguest
+                </div>
             </div> <!-- .row -->
             <div class="entry-content">
                 <p>{{$film->description}}</p>
