@@ -18,7 +18,7 @@ class Film extends Model
 
     public function genres()
     {
-        return $this->hasMany(FilmGenre::class, 'id');
+        return $this->hasMany(FilmGenre::class);
     }
 
     public function image()
