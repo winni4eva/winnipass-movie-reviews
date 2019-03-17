@@ -25,17 +25,14 @@
                         </li>
                         <li><strong>Category:</strong> 
                             @foreach($film->genres as $genre)
-                                <p>{{$genre->genre->name}}</p>
+                                {{$genre->genre->name}} /
                             @endforeach
                         </li>
-                        {{-- <li><strong>Length:</strong> 98 min</li>
-                        <li><strong>Premiere:</strong> 22 March 2013 (USA)</li>
-                         --}}
                     </ul>
                 </div>
             </div> <!-- .row -->
             <div class="entry-content">
-                <p>vitae iaculis nulla cursus in. Suspendisse potenti. In et fringilla ipsum, quis varius quam.</p>
+                <p>{{$film->description}}</p>
             </div>
         </div>
     </div>
