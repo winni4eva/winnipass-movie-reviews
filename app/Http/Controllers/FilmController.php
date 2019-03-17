@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Film;
+use App\Rating;
+use App\Genre;
+use App\Country;
 
 class FilmController extends Controller
 {
@@ -26,7 +29,11 @@ class FilmController extends Controller
      */
     public function create()
     {
-        //
+        $ratings = Rating::pluck('rating', 'id');
+        $genres = Genre::pluck('name', 'id');
+        $countries = Country::pluck('name', 'id');
+
+        return view('film.create')->with(compact('ratings', 'genres', 'countries'));
     }
 
     /**
@@ -48,7 +55,7 @@ class FilmController extends Controller
      */
     public function show($film)
     {
-        $film = Film::with(['ratings.rating'])->where('slug', $film)->orWhere('id', $film)->first();
+        $film = Film::with(['ratings.rating', 'genres.genre'])->where('slug', $film)->orWhere('id', $film)->first();
     
         return view('film.show')->with(['film' => $film]);
     }

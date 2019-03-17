@@ -3,9 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Rating;
 use App\FilmGenre;
-use App\Genre;
 use App\Image;
 use App\Country;
 use App\Comment;
@@ -20,7 +18,7 @@ class Film extends Model
 
     public function genres()
     {
-        return $this->hasManyThrough(FilmGenre::class, Genre::class);
+        return $this->hasMany(FilmGenre::class, 'id');
     }
 
     public function image()

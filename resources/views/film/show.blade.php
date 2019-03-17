@@ -23,15 +23,14 @@
                                 </div>
                             @endforeach
                         </li>
+                        <li><strong>Category:</strong> 
+                            @foreach($film->genres as $genre)
+                                <p>{{$genre->genre->name}}</p>
+                            @endforeach
+                        </li>
                         {{-- <li><strong>Length:</strong> 98 min</li>
                         <li><strong>Premiere:</strong> 22 March 2013 (USA)</li>
-                        <li><strong>Category:</strong> Animation/Adventure/Comedy</li> --}}
-                    </ul>
-
-                    <ul class="starring">
-                        <li><strong>Directors:</strong> Kirk de Mico (as Kirk DeMico). Chris Sanders</li>
-                        <li><strong>Writers:</strong> Chris Sanders (screenplay), Kirk De Micco (screenplay)</li>
-                        <li><strong>Stars:</strong> Nicolas Cage, Ryan Reynolds, Emma Stone</li>
+                         --}}
                     </ul>
                 </div>
             </div> <!-- .row -->

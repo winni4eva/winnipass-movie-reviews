@@ -13,8 +13,8 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/film/{slug}', 'FilmController@show')->name('film');
 Route::resource('/films', 'FilmController');
 

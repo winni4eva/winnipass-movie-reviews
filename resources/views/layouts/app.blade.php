@@ -27,25 +27,25 @@
                         <a href="index.html" id="branding">
                             <img src="images/logo.png" alt="" class="logo">
                             <div class="logo-copy">
-                                <h1 class="site-title">Company Name</h1>
-                                <small class="site-description">Tagline goes here</small>
+                                <h1 class="site-title">Film</h1>
+                                <small class="site-description">Your movie home</small>
                             </div>
                         </a> <!-- #branding -->
     
                         <div class="main-navigation">
                             <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                             <ul class="menu">
-                                <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-                                <li class="menu-item"><a href="about.html">About</a></li>
-                                <li class="menu-item"><a href="review.html">Movie reviews</a></li>
+                                <li class="menu-item current-menu-item"><a href="{{route('home')}}">Home</a></li>
+                                <li class="menu-item"><a href="{{route('films.create')}}">Add Film</a></li>
+                                {{-- <li class="menu-item"><a href="review.html">Movie reviews</a></li>
                                 <li class="menu-item"><a href="joinus.html">Join us</a></li>
-                                <li class="menu-item"><a href="contact.html">Contact</a></li>
+                                <li class="menu-item"><a href="contact.html">Contact</a></li> --}}
                             </ul> <!-- .menu -->
     
-                            <form action="#" class="search-form">
+                            {{-- <form action="#" class="search-form">
                                 <input type="text" placeholder="Search...">
                                 <button><i class="fa fa-search"></i></button>
-                            </form>
+                            </form> --}}
                         </div> <!-- .main-navigation -->
     
                         <div class="mobile-navigation"></div>
@@ -60,7 +60,7 @@
                             <div class="col-md-2">
                                 <div class="widget">
                                     <h3 class="widget-title">About Us</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia tempore vitae mollitia nesciunt saepe cupiditate</p>
+                                    <p>Your movie home</p>
                                 </div>
                             </div>
                         </div> <!-- .row -->
