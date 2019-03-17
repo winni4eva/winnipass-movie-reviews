@@ -8,14 +8,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ExampleTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Home page redirect test
      *
      * @return void
      */
-    public function testCanFetchMovies()
+    public function testHomePageCanRedirectToFilms()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(302);
+        $response = $this->get('/')
+            ->assertStatus(302);
     }
 }
