@@ -28,6 +28,12 @@
                                 {{$genre->genre->name}} /
                             @endforeach
                         </li>
+
+                        <li><strong>Comments:</strong> 
+                            @foreach($film->comments as $comment)
+                                <p>user:[{{$comment->user->name}}]: comment => {{$comment->comment}}</p>
+                            @endforeach
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-6">

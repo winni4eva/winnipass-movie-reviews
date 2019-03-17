@@ -87,7 +87,7 @@ class FilmController extends Controller
      */
     public function show($film)
     {
-        $film = Film::with(['ratings.rating', 'genres.genre'], 'image')->where('slug', $film)->orWhere('id', $film)->first();
+        $film = Film::with(['ratings.rating', 'genres.genre', 'image', 'comments.user'])->where('slug', $film)->orWhere('id', $film)->first();
     
         return view('film.show')->with(['film' => $film]);
     }
