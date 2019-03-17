@@ -8,6 +8,8 @@ use App\Film;
 
 class FilmRating extends Model
 {
+    protected $fillable = ['film_id', 'rating_id'];
+    
     public function film()
     {
         return $this->belongsTo(Film::class);

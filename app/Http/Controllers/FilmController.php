@@ -7,6 +7,9 @@ use App\Film;
 use App\Rating;
 use App\Genre;
 use App\Country;
+use App\FilmRating;
+use App\FilmGenre;
+use App\Image;
 
 class FilmController extends Controller
 {
@@ -45,7 +48,35 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        logger($request->all());
+        $file = $request->file('image');
+
+        $film = Film::create([
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'ticket_price' => $request->get('ticket_price'),
+            'release_date' => $request->get('release_date'),
+            'country_id' => $request->get('country_id'),
+            'slug' => \Str::slug($request->get('name')),
+        ]);
+        
+        $ratings = $request->get('rating_id');
+        $genres = $request->get('genre_id');
+        
+        collect($ratings)->map(function($rating)use($film){
+            $film->ratings()->save(new FilmRating(['rating_id' => $rating]));
+        });
+
+        collect($genres)->map(function($rating)use($film){
+            $film->genres()->save(new FilmGenre(['genre_id' => $rating]));
+        });
+   
+        $destinationPath = public_path().'/cover_photos';
+        $file->move($destinationPath, $file->getClientOriginalName());
+        $path = "/cover_photos/".$file->getClientOriginalName();
+        
+        $film->image()->save(new Image(['img_path' =>$path]));
+
+        return redirect()->route('films.index');
     }
 
     /**

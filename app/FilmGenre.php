@@ -8,6 +8,8 @@ use App\Film;
 
 class FilmGenre extends Model
 {
+    protected $fillable = ['film_id', 'genre_id'];
+
     public function genre()
     {
         return $this->belongsTo(Genre::class);

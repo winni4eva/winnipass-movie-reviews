@@ -11,6 +11,9 @@ use App\FilmRating;
 
 class Film extends Model
 {
+
+    protected $fillable = ['name', 'description', 'slug', 'ticket_price', 'release_date', 'country_id'];
+
     public function ratings()
     {
         return $this->hasMany(FilmRating::class);
