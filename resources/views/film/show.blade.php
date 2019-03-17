@@ -16,6 +16,8 @@
                 <div class="col-md-6">
                     <h2 class="movie-title">{{$film->name}}</h2>
                     <ul class="movie-meta">
+                        <li>Ticket Price: ${{$film->ticket_price}}</li>
+                        <li>Release Date {{$film->release_date}}</li>
                         <li><strong>Ratings:</strong> 
                             @foreach($film->ratings as $rating)
                                 <div>
@@ -31,7 +33,7 @@
 
                         <li><strong>Comments:</strong> 
                             @foreach($film->comments as $comment)
-                                <p>user:[{{$comment->user->name}}]: comment => {{$comment->comment}}</p>
+                                <p>user:[{{$comment->user->name}}]: => {{$comment->comment}}</p>
                             @endforeach
                         </li>
                     </ul>
