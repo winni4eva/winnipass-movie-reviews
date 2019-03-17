@@ -11,7 +11,7 @@
         <div class="content">
             <div class="row">
                 <div class="col-md-6">
-                    <figure class="movie-poster"><img src="dummy/single-image.jpg" alt="#"></figure>
+                <figure class="movie-poster"><img src="{{$film->image->img_path}}" alt="#"></figure>
                 </div>
                 <div class="col-md-6">
                     <h2 class="movie-title">{{$film->name}}</h2>
@@ -23,7 +23,7 @@
                                 </div>
                             @endforeach
                         </li>
-                        <li><strong>Category:</strong> 
+                        <li><strong>Genres:</strong> 
                             @foreach($film->genres as $genre)
                                 {{$genre->genre->name}} /
                             @endforeach

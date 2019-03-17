@@ -6,6 +6,7 @@ use App\FilmGenre;
 use App\Genre;
 use App\FilmRating;
 use App\Rating;
+use App\Image;
 
 class FilmsTableSeeder extends Seeder
 {
@@ -20,22 +21,25 @@ class FilmsTableSeeder extends Seeder
             [
                 'name' => 'Lord Of The Rings',
                 'desc' => 'The adventures of frodo baggins',
-                'price' => 34.32
+                'price' => 34.32,
+                'image' => '/cover_photos/lord-of-the-rings.jpeg',
             ],
             [
                 'name' => 'Aqua Man',
                 'desc' => 'The king of the seven seas returns',
-                'price' => 24.66
+                'price' => 24.66,
+                'image' => '/cover_photos/aqua_man_poster_queen_atlanna.jpg',
             ],
             [
                 'name' => 'Avengers End Game',
                 'desc' => 'The fall of Thanos is near',
-                'price' => 46.45
+                'price' => 46.45,
+                'image' => '/cover_photos/avengers-end-game.png',
             ],
         ];
 
         foreach ($films as $film) {
-            $film = factory(Film::class)->create(
+            $storedFilm = factory(Film::class)->create(
                 [
                     'name' => $film['name'],
                     'description' => $film['desc'], 
@@ -44,16 +48,21 @@ class FilmsTableSeeder extends Seeder
                 ]
             );
 
+            factory(Image::class)->create([
+                'film_id' => $storedFilm->id,
+                'img_path' => $film['image'],
+            ]);
+
             factory(FilmGenre::class, 3)->create(
                 [
-                    'film_id' => $film->id,
+                    'film_id' => $storedFilm->id,
                     'genre_id' => Genre::inRandomOrder()->first()
                 ]
             );
 
             factory(FilmRating::class, 3)->create(
                 [
-                    'film_id' => $film->id,
+                    'film_id' => $storedFilm->id,
                     'rating_id' => Rating::inRandomOrder()->first()
                 ]
             );

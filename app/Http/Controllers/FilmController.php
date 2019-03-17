@@ -20,7 +20,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $films = Film::all();
+        $films = Film::with(['ratings.rating', 'genres.genre'], 'image')->get();
 
         return view('film.films')->with(compact('films'));
     }
@@ -87,7 +87,7 @@ class FilmController extends Controller
      */
     public function show($film)
     {
-        $film = Film::with(['ratings.rating', 'genres.genre'])->where('slug', $film)->orWhere('id', $film)->first();
+        $film = Film::with(['ratings.rating', 'genres.genre'], 'image')->where('slug', $film)->orWhere('id', $film)->first();
     
         return view('film.show')->with(['film' => $film]);
     }
