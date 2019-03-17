@@ -18,12 +18,6 @@ class CreateFilmsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('slug');
-            $table->unsignedBigInteger('rating_id');
-            $table->foreign('rating_id', 'films_rating_id_fk')
-                ->references('id')
-                ->on('ratings')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->decimal('ticket_price', 13, 2);
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id', 'films_country_id_fk')

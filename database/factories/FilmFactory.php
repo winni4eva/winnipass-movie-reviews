@@ -11,7 +11,6 @@ $factory->define(App\Film::class, function (Faker $faker) {
         'name' => $faker->word,
         'description' => $faker->words,
         'slug' => $faker->slug,
-        'rating_id' => Rating::first()->id,
         'country_id' => Country::first()->id,
         'release_date' => now(),
         'ticket_price' => 24.55
