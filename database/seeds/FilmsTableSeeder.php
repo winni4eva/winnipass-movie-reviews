@@ -7,6 +7,8 @@ use App\Genre;
 use App\FilmRating;
 use App\Rating;
 use App\Image;
+use App\User;
+use App\Comment;
 
 class FilmsTableSeeder extends Seeder
 {
@@ -66,6 +68,11 @@ class FilmsTableSeeder extends Seeder
                     'rating_id' => Rating::inRandomOrder()->first()
                 ]
             );
+
+            factory(Comment::class)->create([
+                'user_id' => User::first()->id,
+                'film_id' => $storedFilm->id
+            ]);
         }
     }
 }

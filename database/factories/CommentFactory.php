@@ -8,6 +8,6 @@ $factory->define(App\Comment::class, function (Faker $faker) {
     return [
         'user_id' => User::first()->id,
         'film_id' => Film::first()->id,
-        'comment' => $faker->word
+        'comment' => $faker->sentence
     ];
 });
