@@ -45,7 +45,7 @@ class FilmsTableSeeder extends Seeder
                 [
                     'name' => $film['name'],
                     'description' => $film['desc'], 
-                    'slug' => Str::slug($film['name']), 
+                    'slug' => \Str::slug($film['name']), 
                     'ticket_price' => $film['price'],
                 ]
             );

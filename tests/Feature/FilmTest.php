@@ -3,18 +3,105 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Film;
+use App\FilmGenre;
+use App\Genre;
+use App\FilmRating;
+use App\Rating;
+use App\Image;
+use App\User;
+use App\Comment;
 
-class ExampleTest extends TestCase
+class FilmTest extends TestCase
 {
+    use RefreshDatabase;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->seed("UsersTableSeeder");
+        $this->seed("CountriesTableSeeder");
+        $this->seed("GenresTableSeeder");
+        $this->seed("RatingsTableSeeder");
+    }
+
     /**
-     * Home page redirect test
+     * Test films get request.
      *
      * @return void
      */
-    public function testHomePageCanRedirectToFilms()
+    public function testCanFetchFilms()
     {
-        $response = $this->get('/')
-            ->assertStatus(302);
+        $this->createFilms();
+        $film = Film::first();
+
+        $response = $this->get('/films');
+        $response->assertViewHas(
+            'films', 
+            function ($films) use ($film) {
+                return $films->contains($film);
+            }
+        );
+        $response->assertViewIs('film.films');
+        $response->assertSuccessful();
+    }
+
+    protected function createFilms()
+    {
+        $films = [
+            [
+                'name' => 'Lord Of The Rings',
+                'desc' => 'The adventures of frodo baggins',
+                'price' => 34.32,
+                'image' => '/cover_photos/lord-of-the-rings.jpeg',
+            ],
+            [
+                'name' => 'Aqua Man',
+                'desc' => 'The king of the seven seas returns',
+                'price' => 24.66,
+                'image' => '/cover_photos/aqua_man_poster_queen_atlanna.jpg',
+            ]
+        ];
+
+        foreach ($films as $film) {
+            $storedFilm = factory(Film::class)->create(
+                [
+                    'name' => $film['name'],
+                    'description' => $film['desc'], 
+                    'slug' => \Str::slug($film['name']), 
+                    'ticket_price' => $film['price'],
+                ]
+            );
+
+            factory(Image::class)->create(
+                [
+                    'film_id' => $storedFilm->id,
+                    'img_path' => $film['image'],
+                ]
+            );
+
+            factory(FilmGenre::class, 3)->create(
+                [
+                    'film_id' => $storedFilm->id,
+                    'genre_id' => Genre::inRandomOrder()->first()
+                ]
+            );
+
+            factory(FilmRating::class, 3)->create(
+                [
+                    'film_id' => $storedFilm->id,
+                    'rating_id' => Rating::inRandomOrder()->first()
+                ]
+            );
+
+            factory(Comment::class)->create(
+                [
+                    'user_id' => User::first()->id,
+                    'film_id' => $storedFilm->id
+                ]
+            );
+        }
     }
 }
