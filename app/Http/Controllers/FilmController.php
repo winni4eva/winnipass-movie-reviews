@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Film;
+use App\Repositories\Interfaces\FilmRepositoryInterface;
 use App\Rating;
 use App\Genre;
 use App\Country;
@@ -13,6 +14,12 @@ use App\Image;
 
 class FilmController extends Controller
 {
+    protected $film;
+
+    public function __construct(FilmRepositoryInterface $film)
+    {
+        $this->film = $film;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +27,8 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $films = Film::with(['ratings.rating', 'genres.genre'], 'image')->simplePaginate(1);
+        $paginate = 1;
+        $films = $this->film->get($paginate);
 
         return view('film.films')->with(compact('films'));
     }

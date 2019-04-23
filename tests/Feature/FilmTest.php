@@ -13,6 +13,7 @@ use App\Rating;
 use App\Image;
 use App\User;
 use App\Comment;
+use App\Country;
 
 class FilmTest extends TestCase
 {
@@ -38,6 +39,7 @@ class FilmTest extends TestCase
         $film = Film::first();
 
         $response = $this->get('/films');
+
         $response->assertViewHas(
             'films', 
             function ($films) use ($film) {
@@ -47,6 +49,38 @@ class FilmTest extends TestCase
         $response->assertViewIs('film.films');
         $response->assertSuccessful();
     }
+
+    /**
+     * Test films create request.
+     *
+     * @return void
+     */
+    public function testCanShowCreateFilm()
+    {   
+        $response = $this->get('/films/create');
+
+        $response->assertViewHas('ratings');
+        $response->assertViewHas('genres');
+        $response->assertViewHas('countries');
+        $response->assertViewIs('film.create');
+        $response->assertSuccessful();
+    }
+
+    /**
+     * Test films store request.
+     *
+     * @return void
+     */
+    // public function testCanStoreFilm()
+    // {   
+    //     $response = $this->post('/films', []);
+        
+    //     //$response->assertViewHas('ratings');
+    //     //$response->assertViewHas('genres');
+    //     //$response->assertViewHas('countries');
+    //     //$response->assertViewIs('film.create');
+    //     //$response->assertSuccessful();
+    // }
 
     protected function createFilms()
     {
