@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Film;
+// use App\Film;
 use App\Repositories\Interfaces\FilmRepositoryInterface;
+use App\Http\Requests\FilmPost;
 use App\Rating;
 use App\Genre;
 use App\Country;
@@ -42,7 +43,6 @@ class FilmController extends Controller
     {
         $ratings = Rating::select('id', 'rating')->get();
         $genres = Genre::select('id', 'name')->get();
-        
         $countries = Country::pluck('name', 'id');
 
         return view('film.create')->with(compact('ratings', 'genres', 'countries'));
@@ -51,38 +51,39 @@ class FilmController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\FilmPost  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FilmPost $request)
     {
-        $file = $request->file('image');
+        logger('Made It');
+        // $file = $request->file('image');
+        $validatedRequest = $request->validated();
 
-        $film = Film::create([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'ticket_price' => $request->get('ticket_price'),
-            'release_date' => $request->get('release_date'),
-            'country_id' => $request->get('country_id'),
-            'slug' => \Str::slug($request->get('name')),
-        ]);
+        $film = Film::create($validatedRequest->all());
         
         $ratings = $request->get('rating_id');
         $genres = $request->get('genre_id');
-        
-        collect($ratings)->map(function($rating)use($film){
-            $film->ratings()->save(new FilmRating(['rating_id' => $rating]));
-        });
+        $filmRatings = [];
+        $filmGenres = [];
 
-        collect($genres)->map(function($rating)use($film){
-            $film->genres()->save(new FilmGenre(['genre_id' => $rating]));
-        });
-   
-        $destinationPath = public_path().'/cover_photos';
-        $file->move($destinationPath, $file->getClientOriginalName());
-        $path = "/cover_photos/".$file->getClientOriginalName();
-        
-        $film->image()->save(new Image(['img_path' =>$path]));
+        collect($ratings ?? [])->map( 
+            function ($rating) use (&$filmRatings) {
+                $filmRatings[] = new FilmRating(['rating_id' => $rating]);
+            }
+        );
+
+        collect($genres ?? [])->map(
+            function ($rating) use (&$filmGenres) {
+                $filmGenres[] = new FilmGenre(['genre_id' => $rating]);
+            }
+        );
+
+        $path = $request->file->store('cover_photos');
+        $film->ratings()->saveMany($filmRatings);
+        $film->genres()->saveMany($filmGenres);
+        $film->image()->save(new Image(['img_path' => $path]));
+
 
         return redirect()->route('films.index');
     }

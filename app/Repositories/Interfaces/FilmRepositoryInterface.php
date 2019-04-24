@@ -13,5 +13,5 @@ interface FilmRepositoryInterface
      *
      * @return mixed
      */
-    public function get(): Paginator;
+    public function get($paginate = 10): Paginator;
 }
